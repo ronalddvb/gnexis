@@ -66,11 +66,16 @@ export function FAQSection() {
                   }`}
                 />
               </button>
-              {open && (
-                <p className="max-w-2xl pb-6 text-[15px] font-extralight leading-[1.6] text-silver-mist">
-                  {item.a}
-                </p>
-              )}
+              <div
+                className="grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out"
+                style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+              >
+                <div className="min-h-0">
+                  <p className="max-w-2xl pb-6 text-[15px] font-extralight leading-[1.6] text-silver-mist">
+                    {item.a}
+                  </p>
+                </div>
+              </div>
             </div>
           );
         })}

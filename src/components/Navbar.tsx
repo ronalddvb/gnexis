@@ -6,11 +6,11 @@ import { Logo } from "./Logo";
 import { PrimaryButton } from "./Button";
 
 const links = [
-  { href: "/#servicios", label: "Servicios" },
-  { href: "/#precios", label: "Precios" },
-  { href: "/#casos-de-exito", label: "Casos de Éxito" },
-  { href: "/#blog", label: "Blog" },
-  { href: "/#nosotros", label: "Nosotros" },
+  { href: "/servicios", label: "Servicios" },
+  { href: "/precios", label: "Precios" },
+  { href: "/casos-de-exito", label: "Casos de Éxito" },
+  { href: "/blog", label: "Blog" },
+  { href: "/nosotros", label: "Nosotros" },
 ];
 
 export function Navbar() {

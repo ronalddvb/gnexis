@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 const PALETTE = ["#8052ff", "#ffb829", "#15846e", "#a78bfa", "#5b8cff", "#ff6fd8"];
 
 function mulberry32(seed: number) {
@@ -18,6 +20,8 @@ type Particle = {
   color: string;
   delay: number;
   duration: number;
+  dx: number;
+  dy: number;
 };
 
 function buildParticles(count: number, seed: number): Particle[] {
@@ -30,6 +34,8 @@ function buildParticles(count: number, seed: number): Particle[] {
     color: PALETTE[Math.floor(rand() * PALETTE.length)],
     delay: rand() * 6,
     duration: 5 + rand() * 5,
+    dx: (rand() - 0.5) * 16,
+    dy: (rand() - 0.5) * 16,
   }));
 }
 
@@ -37,6 +43,12 @@ const AMBIENT = buildParticles(60, 7);
 const CORE = buildParticles(90, 42);
 
 function Triangle({ p }: { p: Particle }) {
+  const style: CSSProperties & Record<"--dx" | "--dy", string> = {
+    "--dx": `${p.dx.toFixed(2)}px`,
+    "--dy": `${p.dy.toFixed(2)}px`,
+    animation: `gnexis-drift ${p.duration}s ease-in-out ${p.delay}s infinite alternate`,
+  };
+
   return (
     <polygon
       points={`${p.size / 2},0 ${p.size},${p.size} 0,${p.size}`}
@@ -44,11 +56,7 @@ function Triangle({ p }: { p: Particle }) {
       stroke={p.color}
       strokeWidth="1.2"
       transform={`translate(${p.x}% ${p.y}%) rotate(${p.rotate})`}
-      style={{
-        transformBox: "fill-box",
-        transformOrigin: "center",
-        animation: `gnexis-drift ${p.duration}s ease-in-out ${p.delay}s infinite alternate`,
-      }}
+      style={style}
     />
   );
 }
@@ -56,7 +64,7 @@ function Triangle({ p }: { p: Particle }) {
 export function ParticleField() {
   return (
     <div
-      className="relative aspect-square w-full max-w-[560px] motion-reduce:[&_polygon]:animate-none"
+      className="relative aspect-square w-full max-w-[560px] motion-reduce:[&_polygon]:!animate-none"
       aria-hidden="true"
     >
       <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full overflow-visible">

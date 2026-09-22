@@ -5,18 +5,18 @@ const columns = [
   {
     title: "Servicios",
     links: [
-      { href: "/#servicios", label: "Agentes de IA" },
-      { href: "/#servicios", label: "Plataforma SaaS" },
-      { href: "/#servicios", label: "Desarrollo web" },
-      { href: "/#precios", label: "Precios" },
+      { href: "/servicios/agentes-ia", label: "Agentes de IA" },
+      { href: "/precios", label: "Plataforma SaaS" },
+      { href: "/servicios/desarrollo-web", label: "Desarrollo web" },
+      { href: "/precios", label: "Precios" },
     ],
   },
   {
     title: "Empresa",
     links: [
-      { href: "/#nosotros", label: "Nosotros" },
-      { href: "/#blog", label: "Blog" },
-      { href: "/#casos-de-exito", label: "Casos de éxito" },
+      { href: "/nosotros", label: "Nosotros" },
+      { href: "/blog", label: "Blog" },
+      { href: "/casos-de-exito", label: "Casos de éxito" },
       { href: "/contacto", label: "Contacto" },
     ],
   },
