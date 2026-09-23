@@ -12,6 +12,43 @@ function mulberry32(seed: number) {
   };
 }
 
+/** Crinkled ellipse test: gives the ragged, gyrus-like edge of a brain lobe. */
+function inLobe(
+  x: number,
+  y: number,
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+  waveSeed: number
+) {
+  const dx = x - cx;
+  const dy = y - cy;
+  const theta = Math.atan2(dy / ry, dx / rx);
+  const wobble =
+    1 +
+    0.12 * Math.sin(theta * 5 + waveSeed) +
+    0.07 * Math.sin(theta * 9 + waveSeed * 1.7) +
+    0.04 * Math.sin(theta * 13 + waveSeed * 0.6);
+  const nx = dx / (rx * wobble);
+  const ny = dy / (ry * wobble);
+  return nx * nx + ny * ny <= 1;
+}
+
+/** Point-membership test approximating a brain silhouette in a 0-100 viewBox. */
+function inBrain(x: number, y: number) {
+  const inLeft = inLobe(x, y, 37, 50, 25, 22, 0.4);
+  const inRight = inLobe(x, y, 63, 50, 25, 22, 2.6);
+  const inFrontal = inLobe(x, y, 50, 27, 19, 12, 4.8);
+  const inStem = inLobe(x, y, 50, 80, 7, 11, 1.2);
+
+  if (!(inLeft || inRight || inFrontal || inStem)) return false;
+
+  // Longitudinal fissure: the groove between hemispheres, upper half only.
+  const inGroove = Math.abs(x - 50) < 2.2 && y > 16 && y < 58;
+  return !inGroove;
+}
+
 type Particle = {
   x: number;
   y: number;
@@ -24,23 +61,43 @@ type Particle = {
   dy: number;
 };
 
-function buildParticles(count: number, seed: number): Particle[] {
+function buildParticles(
+  count: number,
+  seed: number,
+  region: "brain" | "field"
+): Particle[] {
   const rand = mulberry32(seed);
-  return Array.from({ length: count }, () => ({
-    x: rand() * 100,
-    y: rand() * 100,
-    size: 4 + rand() * 14,
+  const points: Array<{ x: number; y: number }> = [];
+
+  if (region === "brain") {
+    let attempts = 0;
+    while (points.length < count && attempts < count * 60) {
+      attempts++;
+      const x = 8 + rand() * 84;
+      const y = 6 + rand() * 84;
+      if (inBrain(x, y)) points.push({ x, y });
+    }
+  } else {
+    for (let i = 0; i < count; i++) {
+      points.push({ x: rand() * 100, y: rand() * 100 });
+    }
+  }
+
+  return points.map(({ x, y }) => ({
+    x,
+    y,
+    size: 3 + rand() * 7,
     rotate: rand() * 360,
     color: PALETTE[Math.floor(rand() * PALETTE.length)],
     delay: rand() * 6,
     duration: 5 + rand() * 5,
-    dx: (rand() - 0.5) * 16,
-    dy: (rand() - 0.5) * 16,
+    dx: (rand() - 0.5) * 10,
+    dy: (rand() - 0.5) * 10,
   }));
 }
 
-const AMBIENT = buildParticles(60, 7);
-const CORE = buildParticles(90, 42);
+const AMBIENT = buildParticles(55, 7, "field");
+const CORE = buildParticles(230, 42, "brain");
 
 function Triangle({ p }: { p: Particle }) {
   const style: CSSProperties & Record<"--dx" | "--dy", string> = {
@@ -54,7 +111,7 @@ function Triangle({ p }: { p: Particle }) {
       points={`${p.size / 2},0 ${p.size},${p.size} 0,${p.size}`}
       fill="none"
       stroke={p.color}
-      strokeWidth="1.2"
+      strokeWidth="1.1"
       transform={`translate(${p.x}% ${p.y}%) rotate(${p.rotate})`}
       style={style}
     />
@@ -74,11 +131,7 @@ export function ParticleField() {
       </svg>
       <svg
         viewBox="0 0 100 100"
-        className="absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 overflow-visible"
-        style={{
-          maskImage:
-            "radial-gradient(ellipse 60% 55% at 50% 45%, black 55%, transparent 100%)",
-        }}
+        className="absolute inset-0 h-full w-full overflow-visible"
       >
         {CORE.map((p, i) => (
           <Triangle key={`c-${i}`} p={p} />
