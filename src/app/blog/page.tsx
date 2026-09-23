@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { BlogList } from "@/components/BlogList";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -16,7 +17,9 @@ export default function BlogPage() {
         title="Ideas sobre IA agéntica y automatización"
         text="Análisis prácticos para equipos que quieren entender y aplicar automatización con IA, sin la jerga técnica."
       />
-      <BlogList />
+      <Reveal>
+        <BlogList />
+      </Reveal>
     </>
   );
 }

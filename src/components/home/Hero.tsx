@@ -1,5 +1,5 @@
 import { PrimaryButton, GhostButton } from "@/components/Button";
-import { ParticleField } from "@/components/ParticleField";
+import { BrainVisual } from "@/components/BrainVisual";
 
 export function Hero() {
   return (
@@ -35,7 +35,7 @@ export function Hero() {
         </div>
 
         <div className="flex justify-center lg:justify-end">
-          <ParticleField />
+          <BrainVisual />
         </div>
       </div>
     </section>

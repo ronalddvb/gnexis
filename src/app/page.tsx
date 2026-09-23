@@ -11,23 +11,48 @@ import { PricingSummary } from "@/components/home/PricingSummary";
 import { WhyUs } from "@/components/home/WhyUs";
 import { FAQSection } from "@/components/home/FAQSection";
 import { FinalCTA } from "@/components/home/FinalCTA";
+import { Reveal } from "@/components/Reveal";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <StatsBar />
-      <ProblemSection />
-      <ServicesOverview />
-      <HowItWorks />
-      <UseCases />
-      <FeaturesBento />
-      <IntegrationsStrip />
-      <Testimonials />
-      <PricingSummary />
-      <WhyUs />
-      <FAQSection />
-      <FinalCTA />
+      <Reveal>
+        <StatsBar />
+      </Reveal>
+      <Reveal>
+        <ProblemSection />
+      </Reveal>
+      <Reveal>
+        <ServicesOverview />
+      </Reveal>
+      <Reveal>
+        <HowItWorks />
+      </Reveal>
+      <Reveal>
+        <UseCases />
+      </Reveal>
+      <Reveal>
+        <FeaturesBento />
+      </Reveal>
+      <Reveal>
+        <IntegrationsStrip />
+      </Reveal>
+      <Reveal>
+        <Testimonials />
+      </Reveal>
+      <Reveal>
+        <PricingSummary />
+      </Reveal>
+      <Reveal>
+        <WhyUs />
+      </Reveal>
+      <Reveal>
+        <FAQSection />
+      </Reveal>
+      <Reveal>
+        <FinalCTA />
+      </Reveal>
     </>
   );
 }

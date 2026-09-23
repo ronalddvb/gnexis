@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { CTABanner } from "@/components/CTABanner";
+import { Reveal } from "@/components/Reveal";
 import {
   IconBot,
   IconLayers,
@@ -85,44 +86,47 @@ export default function ServiciosPage() {
       />
 
       {blocks.map((block, i) => (
-        <section
-          key={block.id}
-          id={block.id}
-          className={`container-gnexis py-16 md:py-20 ${
-            i > 0 ? "border-t border-white/10" : ""
-          }`}
-        >
-          <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
-            <div>
-              <block.icon className="h-8 w-8 text-electric-iris" />
-              <h2 className="mt-6 text-[36px] font-normal leading-[1.2] tracking-[-1px] text-white">
-                {block.title}
-              </h2>
-              <p className="mt-5 max-w-md text-[16px] font-extralight leading-[1.6] text-silver-mist">
-                {block.text}
-              </p>
-              <Link
-                href={block.href}
-                className="mt-8 inline-block text-[14px] font-semibold uppercase tracking-[0.025em] text-electric-iris underline underline-offset-4"
-              >
-                {block.linkLabel ?? "Conocer más"}
-              </Link>
+        <Reveal key={block.id}>
+          <section
+            id={block.id}
+            className={`container-gnexis py-16 md:py-20 ${
+              i > 0 ? "border-t border-white/10" : ""
+            }`}
+          >
+            <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
+              <div>
+                <block.icon className="h-8 w-8 text-electric-iris" />
+                <h2 className="mt-6 text-[36px] font-normal leading-[1.2] tracking-[-1px] text-white">
+                  {block.title}
+                </h2>
+                <p className="mt-5 max-w-md text-[16px] font-extralight leading-[1.6] text-silver-mist">
+                  {block.text}
+                </p>
+                <Link
+                  href={block.href}
+                  className="mt-8 inline-block text-[14px] font-semibold uppercase tracking-[0.025em] text-electric-iris underline underline-offset-4"
+                >
+                  {block.linkLabel ?? "Conocer más"}
+                </Link>
+              </div>
+              <ul className="flex flex-col gap-4">
+                {block.items.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <IconCheck className="mt-1 h-4 w-4 shrink-0 text-electric-iris" />
+                    <span className="text-[16px] font-extralight text-silver-mist">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="flex flex-col gap-4">
-              {block.items.map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <IconCheck className="mt-1 h-4 w-4 shrink-0 text-electric-iris" />
-                  <span className="text-[16px] font-extralight text-silver-mist">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+          </section>
+        </Reveal>
       ))}
 
-      <CTABanner />
+      <Reveal>
+        <CTABanner />
+      </Reveal>
     </>
   );
 }

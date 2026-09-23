@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { CTABanner } from "@/components/CTABanner";
 import { CaseStudiesGrid } from "@/components/CaseStudiesGrid";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Casos de Éxito",
@@ -17,8 +18,12 @@ export default function CasosDeExitoPage() {
         title="Empresas que ya automatizaron con Gnexis"
         text="Resultados reales de equipos que reemplazaron procesos manuales por agentes de IA agéntica."
       />
-      <CaseStudiesGrid />
-      <CTABanner />
+      <Reveal>
+        <CaseStudiesGrid />
+      </Reveal>
+      <Reveal>
+        <CTABanner />
+      </Reveal>
     </>
   );
 }

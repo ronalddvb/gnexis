@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { CTABanner } from "@/components/CTABanner";
+import { Reveal } from "@/components/Reveal";
 import {
   IconCheck,
   IconChat,
@@ -60,49 +61,55 @@ export default function AgentesIAPage() {
         text="Un agente de IA agéntica entiende el objetivo, decide los pasos necesarios y actúa en tus sistemas para completarlo — sin depender de guiones fijos ni de intervención humana constante."
       />
 
-      <section className="container-gnexis border-t border-white/10 py-16 md:py-20">
-        <h2 className="max-w-xl text-[36px] font-normal leading-[1.2] tracking-[-1px] text-white">
-          Un agente para cada flujo de tu operación
-        </h2>
-        <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {flows.map((f) => (
-            <div key={f.title} className="flex gap-4">
-              <f.icon className="h-6 w-6 shrink-0 text-electric-iris" />
-              <div>
-                <h3 className="text-[18px] font-normal text-white">
-                  {f.title}
-                </h3>
-                <p className="mt-2 text-[15px] font-extralight leading-[1.5] text-silver-mist">
-                  {f.text}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="container-gnexis border-t border-white/10 py-16 md:py-20">
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
-          <h2 className="max-w-md text-[36px] font-normal leading-[1.2] tracking-[-1px] text-white">
-            Por qué un agente agéntico, y no un chatbot más
+      <Reveal>
+        <section className="container-gnexis border-t border-white/10 py-16 md:py-20">
+          <h2 className="max-w-xl text-[36px] font-normal leading-[1.2] tracking-[-1px] text-white">
+            Un agente para cada flujo de tu operación
           </h2>
-          <ul className="flex flex-col gap-4">
-            {benefits.map((b) => (
-              <li key={b} className="flex items-start gap-3">
-                <IconCheck className="mt-1 h-4 w-4 shrink-0 text-electric-iris" />
-                <span className="text-[16px] font-extralight text-silver-mist">
-                  {b}
-                </span>
-              </li>
+          <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {flows.map((f) => (
+              <div key={f.title} className="flex gap-4">
+                <f.icon className="h-6 w-6 shrink-0 text-electric-iris" />
+                <div>
+                  <h3 className="text-[18px] font-normal text-white">
+                    {f.title}
+                  </h3>
+                  <p className="mt-2 text-[15px] font-extralight leading-[1.5] text-silver-mist">
+                    {f.text}
+                  </p>
+                </div>
+              </div>
             ))}
-          </ul>
-        </div>
-      </section>
+          </div>
+        </section>
+      </Reveal>
 
-      <CTABanner
-        title="Diseñemos tu primer agente de IA"
-        text="Cuéntanos tu proceso más repetitivo y te mostramos cómo automatizarlo."
-      />
+      <Reveal>
+        <section className="container-gnexis border-t border-white/10 py-16 md:py-20">
+          <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
+            <h2 className="max-w-md text-[36px] font-normal leading-[1.2] tracking-[-1px] text-white">
+              Por qué un agente agéntico, y no un chatbot más
+            </h2>
+            <ul className="flex flex-col gap-4">
+              {benefits.map((b) => (
+                <li key={b} className="flex items-start gap-3">
+                  <IconCheck className="mt-1 h-4 w-4 shrink-0 text-electric-iris" />
+                  <span className="text-[16px] font-extralight text-silver-mist">
+                    {b}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <CTABanner
+          title="Diseñemos tu primer agente de IA"
+          text="Cuéntanos tu proceso más repetitivo y te mostramos cómo automatizarlo."
+        />
+      </Reveal>
     </>
   );
 }

@@ -49,17 +49,6 @@ body {
   padding-inline: 24px;
 }
 
-@keyframes gnexis-drift {
-  from {
-    opacity: 0.3;
-    translate: 0 0;
-  }
-  to {
-    opacity: 0.95;
-    translate: var(--dx, 8px) var(--dy, 8px);
-  }
-}
-
 @media (min-width: 768px) {
   .container-gnexis {
     padding-inline: 36px;

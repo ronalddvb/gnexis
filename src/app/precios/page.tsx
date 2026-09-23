@@ -3,6 +3,7 @@ import { PageHero } from "@/components/PageHero";
 import { CTABanner } from "@/components/CTABanner";
 import { PricingTable } from "@/components/pricing/PricingTable";
 import { PricingFAQ } from "@/components/pricing/PricingFAQ";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Precios",
@@ -18,13 +19,19 @@ export default function PreciosPage() {
         title="Un plan para cada etapa de tu automatización"
         text="Elige el plan que se ajusta a tu operación hoy y escálalo a medida que sumas más agentes."
       />
-      <PricingTable />
-      <PricingFAQ />
-      <CTABanner
-        title="¿No estás seguro qué plan elegir?"
-        text="Cuéntanos sobre tu operación y te recomendamos el plan correcto."
-        cta="Habla con ventas"
-      />
+      <Reveal>
+        <PricingTable />
+      </Reveal>
+      <Reveal>
+        <PricingFAQ />
+      </Reveal>
+      <Reveal>
+        <CTABanner
+          title="¿No estás seguro qué plan elegir?"
+          text="Cuéntanos sobre tu operación y te recomendamos el plan correcto."
+          cta="Habla con ventas"
+        />
+      </Reveal>
     </>
   );
 }

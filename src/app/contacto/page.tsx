@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
+import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 
 export default function ContactoPage() {
   return (
+    <Reveal>
     <section className="container-gnexis py-20 md:py-28">
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.1fr]">
         <div>
@@ -58,5 +60,6 @@ export default function ContactoPage() {
         <ContactForm />
       </div>
     </section>
+    </Reveal>
   );
 }
